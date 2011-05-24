@@ -5,7 +5,7 @@
 # modify it under the same terms as Perl itself.
 
 package Net::SMS::Cellsynt;
-our $VERSION = 0.3;
+our $VERSION = 0.31;
 use strict;
 use warnings;
 use WWW::Curl::Easy;
@@ -210,7 +210,7 @@ sub send_sms {
 	my $curl = new WWW::Curl::Easy;
 	open(my $curld, ">", \$body);
 	$curl->setopt(CURLOPT_URL, $uri);
-	$curl->setopt(CURLOPT_WRITEDATA, $curld);
+	$curl->setopt(CURLOPT_WRITEDATA, \$curld);
 	$curl->setopt(CURLOPT_FOLLOWLOCATION, 1);
 	$curl->perform();
 	close $curld;
@@ -221,15 +221,15 @@ sub send_sms {
 			message => 'SMS gateway does not follow '. 
 			           'protocol (empty body)',
 		};
-	} elsif(my ($id) = $body =~ /^OK: (.*)/i) {
+	} elsif($body =~ /^OK: (.*)/) {
 		return { 
 			status => 'ok',
-			id => $id,
+			uri => $1,
 		};
-	} elsif(my ($err) = $body =~ /^Error: (.*)/i) {
+	} elsif($body=~/^Error: (.*)/) {
 		return { 
 			status => 'error-gateway',
-			message => $err,
+			uri => $1,
 		};
 	} else {
 		return {

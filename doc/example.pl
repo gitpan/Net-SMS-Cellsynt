@@ -24,17 +24,17 @@ if($#ARGV != 1) {
 }
 
 my $sms = Net::SMS::Cellsynt->new(
-	username=>'olofjohansson',
-	password=>'y3YsRaVG',
+	username=>'zibri',
+	password=>'s3kr3t',
 	origtype=>'alpha',
-	orig=>'NetSMS',
+	orig=>'zibri',
 	#test=>1,
 );
 
 my $text = $ARGV[1];
 my $charset = detect($text);
 
-if(defined $charset && $charset ne 'ISO-8859-1') {
+if($charset ne 'ISO-8859-1') {
 	my $conv = Text::Iconv->new($charset, 'ISO-8859-1');
 	$text = $conv->convert($text);
 }

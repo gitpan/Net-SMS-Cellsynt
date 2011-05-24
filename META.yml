@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Net-SMS-Cellsynt
-version:            0.3
+version:            0.31
 abstract:           Send SMS through Cellsynt SMS gateway
 author:
     - Olof Johansson <zibri@cpan.org>
