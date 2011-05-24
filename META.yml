@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Net-SMS-Cellsynt
-version:            0.2
+version:            0.3
 abstract:           Send SMS through Cellsynt SMS gateway
 author:
     - Olof Johansson <zibri@cpan.org>
@@ -11,13 +11,15 @@ configure_requires:
 build_requires:
     ExtUtils::MakeMaker:  0
 requires:
+    URI:              0
     URI::Escape:      0
+    URI::QueryParam:  0
     WWW::Curl::Easy:  0
 no_index:
     directory:
         - t
         - inc
-generated_by:       ExtUtils::MakeMaker version 6.55_02
+generated_by:       ExtUtils::MakeMaker version 6.56
 meta-spec:
     url:      http://module-build.sourceforge.net/META-spec-v1.4.html
     version:  1.4
